@@ -6,7 +6,7 @@ A simple, professional ordering app for restaurant staff. Built with Next.js 14 
 
 ```bash
 # 1) Clone
-git clone https://github.com/<your-username>/buhari-hotel.git
+git clone https://github.com/rgayashan/buhari-hotel.git
 cd buhari-hotel
 
 # 2) Install (Node 18+)
