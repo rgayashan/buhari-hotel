@@ -1,0 +1,115 @@
+.header {
+    background: linear-gradient(to right, #dc2626, #ea580c);
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 1.5rem 1rem;
+  }
+  
+  .content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .branding {
+    display: flex;
+    flex-direction: column;
+  }
+ 
+ .brandRow {
+   display: flex;
+   align-items: center;
+   gap: 10px;
+ }
+ 
+ .logoImg {
+   border-radius: 8px;
+   object-fit: cover;
+ }
+  
+  .title {
+    font-size: 1.875rem;
+    font-weight: 700;
+    margin: 0;
+  }
+  
+  .subtitle {
+    color: #fecaca;
+    font-size: 0.875rem;
+    margin: 0.25rem 0 0 0;
+  }
+  
+  .actions {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .cartButton {
+    position: relative;
+    background: white;
+    color: #dc2626;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background-color 0.2s;
+  }
+  
+  .cartButton:hover {
+    background-color: #fef2f2;
+  }
+  
+  .cartBadge {
+    position: absolute;
+    top: -0.5rem;
+    right: -0.5rem;
+    background-color: #fbbf24;
+    color: #7c2d12;
+    border-radius: 9999px;
+    width: 1.5rem;
+    height: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  .logoutButton {
+    background: transparent;
+    color: white;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: background-color 0.2s, border-color 0.2s;
+  }
+
+  .logoutButton:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.7);
+  }
+  
+  @media (max-width: 768px) {
+    .title {
+      font-size: 1.5rem;
+    }
+    
+    .subtitle {
+      font-size: 0.75rem;
+    }
+  }
+  

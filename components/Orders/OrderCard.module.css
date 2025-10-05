@@ -1,0 +1,140 @@
+.card {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  transition: box-shadow 0.2s;
+}
+
+.card:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.info {
+  flex: 1;
+  min-width: 0;
+}
+
+.table {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 0.25rem 0;
+}
+
+.customer {
+  color: #4b5563;
+  margin: 0 0 0.25rem 0;
+  font-size: 0.9375rem;
+}
+
+.timestamp {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+.summary {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.total {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #dc2626;
+  white-space: nowrap;
+}
+
+.status {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.pending {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.completed {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.cancelled {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.divider {
+  border-top: 1px solid #e5e7eb;
+  margin-bottom: 1rem;
+}
+
+.details {
+  padding-top: 0;
+}
+
+.detailsHeading {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #374151;
+  margin: 0 0 0.75rem 0;
+}
+
+.itemList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+}
+
+.itemLabel {
+  color: #374151;
+  flex: 1;
+}
+
+.itemLabel strong {
+  color: #1f2937;
+  margin-right: 0.5rem;
+}
+
+.itemPrice {
+  color: #6b7280;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .header {
+    flex-direction: column;
+  }
+  
+  .summary {
+    align-items: flex-start;
+    width: 100%;
+  }
+}

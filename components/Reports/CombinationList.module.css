@@ -1,0 +1,125 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+  border: 2px solid transparent;
+}
+
+.item:hover {
+  background-color: #f3f4f6;
+  border-color: #dc2626;
+  transform: translateX(4px);
+}
+
+.itemContent {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.rank {
+  background-color: #dc2626;
+  color: white;
+  min-width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  flex-shrink: 0;
+}
+
+.topRank {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  box-shadow: 0 2px 4px rgba(245, 158, 11, 0.3);
+}
+
+.combo {
+  font-weight: 600;
+  color: #1f2937;
+  font-size: 0.9375rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.count {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  background-color: #fee2e2;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  flex-shrink: 0;
+}
+
+.countNumber {
+  color: #991b1b;
+  font-weight: 700;
+  font-size: 1.125rem;
+  line-height: 1;
+}
+
+.countLabel {
+  color: #dc2626;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.empty {
+  text-align: center;
+  padding: 3rem 1.5rem;
+}
+
+.emptyIcon {
+  color: #d1d5db;
+  margin: 0 auto 1rem;
+  display: block;
+}
+
+.emptyText {
+  color: #6b7280;
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+}
+
+.emptySubtext {
+  color: #9ca3af;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  
+  .count {
+    align-self: stretch;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .combo {
+    font-size: 0.875rem;
+  }
+}

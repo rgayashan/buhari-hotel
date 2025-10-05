@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Buhari Hotel – Waiter Ordering System
 
-## Getting Started
+A simple, professional ordering app for restaurant staff. Built with Next.js 14 and TypeScript.
 
-First, run the development server:
+## Quick Start
 
 ```bash
+# 1) Clone
+git clone https://github.com/<your-username>/buhari-hotel.git
+cd buhari-hotel
+
+# 2) Install (Node 18+)
+npm install
+
+# 3) Run in dev
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Open http://localhost:3000
+
+# 4) Build and start (production)
+npm run build
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Demo Login
+- Email: `demo@buhari.com`
+- Password: `demo123`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## How It Works
+- Take Order tab: select one main dish, one or more side dishes, desserts optional.
+- You must also enter a table number.
+- Click Place Order to save. Orders and Reports update instantly.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Project Structure (high level)
+- `app/` Next.js app router pages and layout
+- `components/` UI, Order flow, Reports, Layout
+- `hooks/useOrders.ts` order state, validations, storage
+- `utils/` calculations, storage, simple demo auth
+- `public/images/` logo and images
 
-## Learn More
+## Scripts
+- `npm run dev`: start dev server
+- `npm run build`: build for production
+- `npm start`: run production server
+- `npm run lint`: lint code
+- `npm run type-check`: TypeScript check
 
-To learn more about Next.js, take a look at the following resources:
+## Best Practices (short)
+- Keep components small and focused; use clear names.
+- Avoid deep nesting; use early returns.
+- Type everything; avoid `any`.
+- Do not catch errors silently; handle meaningfully.
+- Match existing formatting; do not reformat unrelated code.
+- Use localStorage only for demo auth; never for real secrets.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Troubleshooting
+- Node 18+ required (see `package.json` engines).
+- If port is busy, run with another port: `PORT=3001 npm run dev`.
+- Clear demo data: clear browser localStorage.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

@@ -1,0 +1,56 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.stats {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 1rem 1.5rem;
+}
+
+.statsText {
+  margin: 0;
+  color: #4b5563;
+  font-size: 0.9375rem;
+}
+
+.statsText strong {
+  color: #dc2626;
+  font-weight: 700;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.empty {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+.emptyIcon {
+  color: #d1d5db;
+  margin: 0 auto 1rem;
+  display: block;
+}
+
+.emptyText {
+  color: #6b7280;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+}
+
+.emptySubtext {
+  color: #9ca3af;
+  font-size: 0.9375rem;
+  margin: 0;
+}

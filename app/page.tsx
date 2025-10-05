@@ -1,103 +1,248 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import React, { useState } from 'react';
+import { Users, FileText, BarChart3 } from 'lucide-react';
+import { Header } from '@/components/Layout/Header';
+import { Footer } from '@/components/Layout/Footer';
+import { CustomerInfo } from '@/components/Order/CustomerInfo';
+import { MenuSection } from '@/components/Order/MenuSection';
+import { OrderSummary } from '@/components/Order/OrderSummary';
+import { OrderList } from '@/components/Orders/OrderList';
+import { ReportDashboard } from '@/components/Reports/ReportDashboard';
+import { useOrders } from '@/hooks/useOrders';
+import { MENU_DATA } from '@/constants/menu';
+import { TabType, MenuItem } from '@/types';
+import styles from './page.module.css';
+import { Toast } from '@/components/UI/Toast';
+
+/**
+ * Main application page component
+ * Handles order taking, viewing orders, and reports
+ */
+export default function HomePage() {
+  const [activeTab, setActiveTab] = useState<TabType>('order');
+  const [toastOpen, setToastOpen] = useState(false);
+  const {
+    orders,
+    currentOrder,
+    addOrder,
+    updateCurrentOrder,
+    selectMainDish,
+    toggleSideDish,
+    toggleDessert,
+  } = useOrders();
+
+  // Calculate cart count for header badge
+  const cartCount =
+    (currentOrder.mainDish ? 1 : 0) +
+    currentOrder.sideDishes.length +
+    currentOrder.desserts.length;
+
+  /**
+   * Handle main dish selection
+   * @param dish - Main dish item to select
+   */
+  const handleMainDishSelect = (dish: MenuItem): void => {
+    selectMainDish(dish);
+  };
+
+  /**
+   * Handle side dish toggle (add/remove)
+   * @param dish - Side dish item to toggle
+   */
+  const handleSideDishToggle = (dish: MenuItem): void => {
+    toggleSideDish(dish);
+  };
+
+  /**
+   * Handle dessert toggle (add/remove)
+   * @param dessert - Dessert item to toggle
+   */
+  const handleDessertToggle = (dessert: MenuItem): void => {
+    toggleDessert(dessert);
+  };
+
+  /**
+   * Handle order submission
+   * Displays success/error message via alert
+   */
+  const handleOrderSubmit = (): void => {
+    const result = addOrder();
+    if (result.success) {
+      setToastOpen(true);
+    } else {
+      alert(result.message);
+    }
+    
+    // If successful, scroll to top
+    if (result.success) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  /**
+   * Handle cart button click
+   * Scrolls to top of page to view order summary
+   */
+  const handleCartClick = (): void => {
+    setActiveTab('order');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  /**
+   * Handle tab change
+   * @param tab - New active tab
+   */
+  const handleTabChange = (tab: TabType): void => {
+    setActiveTab(tab);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className={styles.app}>
+      {/* Header Section */}
+      <Header cartCount={cartCount} onCartClick={handleCartClick} />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      {/* Navigation Tabs */}
+      <nav className={styles.nav} role="navigation" aria-label="Main navigation">
+        <div className={styles.navContainer}>
+          <div className={styles.tabList} role="tablist">
+            <button
+              onClick={() => handleTabChange('order')}
+              className={`${styles.tab} ${
+                activeTab === 'order' ? styles.activeTab : styles.inactiveTab
+              }`}
+              role="tab"
+              aria-selected={activeTab === 'order'}
+              aria-controls="order-panel"
+            >
+              <Users size={18} aria-hidden="true" />
+              <span className={styles.tabText}>Take Order</span>
+            </button>
+            <button
+              onClick={() => handleTabChange('orders')}
+              className={`${styles.tab} ${
+                activeTab === 'orders' ? styles.activeTab : styles.inactiveTab
+              }`}
+              role="tab"
+              aria-selected={activeTab === 'orders'}
+              aria-controls="orders-panel"
+            >
+              <FileText size={18} aria-hidden="true" />
+              <span className={styles.tabText}>All Orders</span>
+            </button>
+            <button
+              onClick={() => handleTabChange('reports')}
+              className={`${styles.tab} ${
+                activeTab === 'reports' ? styles.activeTab : styles.inactiveTab
+              }`}
+              role="tab"
+              aria-selected={activeTab === 'reports'}
+              aria-controls="reports-panel"
+            >
+              <BarChart3 size={18} aria-hidden="true" />
+              <span className={styles.tabText}>Reports</span>
+            </button>
+          </div>
         </div>
+      </nav>
+
+      {/* Main Content Area */}
+      <main className={styles.main}>
+        {/* Order Taking Tab Panel */}
+        {activeTab === 'order' && (
+          <div
+            id="order-panel"
+            role="tabpanel"
+            aria-labelledby="order-tab"
+            className={styles.orderSection}
+          >
+            {/* Customer Information Form */}
+            <CustomerInfo
+              tableNumber={currentOrder.tableNumber}
+              customerName={currentOrder.customerName}
+              onTableNumberChange={(value) =>
+                updateCurrentOrder({ tableNumber: value })
+              }
+              onCustomerNameChange={(value) =>
+                updateCurrentOrder({ customerName: value })
+              }
+            />
+
+            {/* Main Dishes Selection */}
+            <MenuSection
+              title="Main Dishes"
+              items={MENU_DATA.mainDishes}
+              selectedItems={currentOrder.mainDish}
+              onItemToggle={handleMainDishSelect}
+              required
+              color="red"
+            />
+
+            {/* Side Dishes Selection */}
+            <MenuSection
+              title="Side Dishes"
+              items={MENU_DATA.sideDishes}
+              selectedItems={currentOrder.sideDishes}
+              onItemToggle={handleSideDishToggle}
+              multiSelect
+              required
+              disabled={!currentOrder.mainDish}
+              color="orange"
+            />
+
+            {/* Desserts Selection */}
+            <MenuSection
+              title="Desserts"
+              items={MENU_DATA.desserts}
+              selectedItems={currentOrder.desserts}
+              onItemToggle={handleDessertToggle}
+              multiSelect
+              disabled={!currentOrder.mainDish}
+              color="yellow"
+            />
+
+            {/* Order Summary and Submit */}
+            <OrderSummary order={currentOrder} onSubmit={handleOrderSubmit} />
+          </div>
+        )}
+
+        {/* All Orders Tab Panel */}
+        {activeTab === 'orders' && (
+          <div
+            id="orders-panel"
+            role="tabpanel"
+            aria-labelledby="orders-tab"
+            className={styles.tabPanel}
+          >
+            <h2 className={styles.pageHeading}>All Orders</h2>
+            <OrderList orders={orders} />
+          </div>
+        )}
+
+        {/* Reports Tab Panel */}
+        {activeTab === 'reports' && (
+          <div
+            id="reports-panel"
+            role="tabpanel"
+            aria-labelledby="reports-tab"
+            className={styles.tabPanel}
+          >
+            <h2 className={styles.pageHeading}>Sales Reports</h2>
+            <ReportDashboard orders={orders} />
+          </div>
+        )}
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+      {/* Footer Section */}
+      <Footer />
+
+      <Toast
+        open={toastOpen}
+        onClose={() => setToastOpen(false)}
+        message="Order placed successfully!"
+        variant="success"
+      />
     </div>
   );
 }

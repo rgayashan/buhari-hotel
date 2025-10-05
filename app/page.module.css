@@ -1,0 +1,174 @@
+/**
+ * Main page styles
+ * Contains layout and styling for the home page
+ */
+
+.app {
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #ffedd5, #fecaca);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Navigation Styles */
+.nav {
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.navContainer {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.tabList {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  background: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-bottom: 3px solid transparent;
+  font-size: 0.9375rem;
+}
+
+.tab:focus-visible {
+  outline: 2px solid #dc2626;
+  outline-offset: -2px;
+}
+
+.tabText {
+  display: none;
+}
+
+/* Show tab text on larger screens */
+@media (min-width: 640px) {
+  .tabText {
+    display: inline;
+  }
+}
+
+/* Active tab styling */
+.activeTab {
+  color: #dc2626;
+  background-color: #fef2f2;
+  border-bottom-color: #dc2626;
+}
+
+/* Inactive tab styling */
+.inactiveTab {
+  color: #6b7280;
+}
+
+.inactiveTab:hover {
+  background-color: #f9fafb;
+  color: #374151;
+}
+
+/* Main content area */
+.main {
+  flex: 1;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  width: 100%;
+}
+
+/* Order section specific styles */
+.orderSection {
+  max-width: 64rem;
+  margin: 0 auto;
+}
+
+/* Page headings */
+.pageHeading {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 1.5rem 0;
+  line-height: 1.2;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .main {
+    padding: 1.5rem 1rem;
+  }
+
+  .pageHeading {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .tab {
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .main {
+    padding: 1rem 0.75rem;
+  }
+
+  .navContainer {
+    padding: 0 0.75rem;
+  }
+
+  .tab {
+    padding: 0.75rem 0.75rem;
+  }
+
+  .pageHeading {
+    font-size: 1.25rem;
+  }
+}
+
+/* Smooth transitions for tab content */
+.orderSection {
+  animation: fadeIn 0.3s ease-in;
+}
+
+.tabPanel {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Print styles */
+@media print {
+  .nav,
+  .tab {
+    display: none;
+  }
+
+  .app {
+    background: white;
+  }
+
+  .main {
+    max-width: 100%;
+    padding: 0;
+  }
+}
