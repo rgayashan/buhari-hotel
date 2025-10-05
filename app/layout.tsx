@@ -12,6 +12,11 @@ export const metadata: Metadata = {
   title: 'Buhari Hotel - Waiter Ordering System',
   description: 'Professional ordering system for Buhari Hotel waiters',
   keywords: ['restaurant', 'ordering', 'hotel', 'waiter', 'management'],
+  icons: {
+    icon: '/images/logo.jpg',
+    apple: '/images/logo.jpg',
+    shortcut: '/images/logo.jpg',
+  },
 };
 
 /**
